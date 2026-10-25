@@ -1,0 +1,362 @@
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --slot: clamp(36px, 4vw, 70px);
+    /* width of the left icon column and the right LVL column */
+}
+
+body {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+
+    font-family: "VT323", monospace;
+    font-size: 20px;
+
+    background-color: #00022E;
+    color: white;
+
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+img {
+    -webkit-user-drag: none;
+    user-drag: none;
+    user-select: none;
+    -webkit-user-select: none;
+    image-rendering: pixelated;
+}
+
+/* RIGHT: UPGRADES */
+.upgrade-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    flex: 1;
+    min-width: 0;
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    padding: 16px;
+    gap: 20px;
+}
+
+/* ICON SLOT: */
+.upgrade-icon {
+    width: var(--slot);
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fangs-icon,
+.helmet-icon,
+.astronaut-icon,
+.planets-icon,
+.crowd-icon,
+.reset-icon {
+    width: clamp(28px, 3vw, 50px);
+    height: auto;
+    margin: 0;
+    flex-shrink: 0;
+}
+
+.oxygen-icon {
+    width: clamp(32px, 3.5vw, 60px);
+    height: auto;
+    margin: 0;
+    flex-shrink: 0;
+}
+
+/* UPGRADE BUTTONS (one shared rule) */
+.upgrade1,
+.upgrade2,
+.upgrade3,
+.upgrade4,
+.upgrade5,
+.suitChange,
+.planetChange,
+.reset-button,
+.backPlanet {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+
+    width: 100%;
+    min-width: 0;
+
+    padding: clamp(8px, 1vw, 12px);
+
+    border: 1px solid #b905f5;
+    border-radius: 10px;
+
+    background: rgba(0, 2, 46, 0.9);
+    color: white;
+
+    font-family: "VT323", monospace;
+    font-size: clamp(16px, 1.5vw, 24px);
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.upgrade1:hover,
+.upgrade2:hover,
+.upgrade3:hover,
+.upgrade4:hover,
+.upgrade5:hover,
+.suitChange:hover,
+.planetChange:hover,
+.reset-button:hover,
+.backPlanet:hover {
+    background: #51206b;
+}
+
+/* TEXT: fills the middle and is centered */
+.upgrade-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 4px;
+
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+.upgrade-text p {
+    margin: 0;
+}
+
+/* RIGHT COLUMN: same width as the icon slot, so the text sits in the true center */
+.upgrade-value {
+    width: var(--slot);
+    flex-shrink: 0;
+    text-align: center;
+}
+
+/* buttons with no LVL (Space Suit, Ascent, Prev. Planet, Reset) get an invisible spacer */
+.upgrade-section button:not(:has(.upgrade-value))::after {
+    content: "";
+    width: var(--slot);
+    flex-shrink: 0;
+}
+
+/* LEFT: GAMEPLAY */
+.game-features {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(16px, 4vh, 63px);
+
+    flex: 1;
+    min-width: 0;
+    height: 100vh;
+    overflow-y: auto;
+    padding: 16px;
+}
+
+/* MIDDLE SECTION: PLANET, TIGER, STATS */
+.game-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    isolation: isolate;
+
+    flex: 2;
+    min-width: 0;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.game-background {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.earth-wrapper {
+    position: relative;
+    z-index: 1;
+
+    width: min(90%, 80vh);
+    aspect-ratio: 1 / 1;
+
+    margin: auto;
+    flex-shrink: 0;
+}
+
+.background-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.tiger {
+    position: absolute;
+    top: 52%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 25%;
+    height: auto;
+    z-index: 2;
+}
+
+.playerstats {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-bottom: auto;
+    width: auto;
+}
+
+/* CLICKER AND UPGRADE AREA */
+.bottom-controls {
+    position: absolute;
+    bottom: 24px;
+    left: 24px;
+    right: 24px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+/* CREDITS */
+.credit {
+    position: absolute;
+    bottom: 6px;
+    left: 0;
+    right: 0;
+    margin: 0;
+    padding-left: 16px;
+    text-align: left;
+    font-size: 16px;
+    opacity: 0.7;
+}
+
+/* MAIN CLICKER */
+.steak {
+    width: min(350px, 80%);
+    user-select: none;
+    height: auto;
+    cursor: pointer;
+    filter: drop-shadow(0 0 18px rgba(185, 5, 245, 0.5));
+    transition: transform 0.1s, filter 0.2s;
+}
+
+.steak:hover {
+    transform: scale(1.04);
+    filter: drop-shadow(0 0 28px rgba(185, 5, 245, 0.9));
+}
+
+.steak:active {
+    transform: scale(0.93);
+}
+
+/* the POP */
+.pop {
+    position: fixed;
+    z-index: 50;
+    pointer-events: none;
+    transform: translateX(-50%);
+    font-family: "Press Start 2P", monospace;
+    font-size: 18px;
+    color: #e6a6ff;
+    text-shadow: 2px 2px 0 #51206b;
+    animation: rise 0.8s ease-out forwards;
+}
+
+@keyframes rise {
+    from {
+        opacity: 1;
+        margin-top: 0;
+    }
+
+    to {
+        opacity: 0;
+        margin-top: -70px;
+    }
+}
+
+/* SMALL SCREEN SUPPORT */
+@media (max-width: 600px) {
+    .game-header {
+        top: 12px;
+        left: 12px;
+    }
+
+    .bottom-controls {
+        left: 12px;
+        right: 12px;
+        bottom: 16px;
+    }
+}
+
+/* TOAST MESSAGES */
+.toast {
+    position: fixed;
+    top: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-20px);
+    z-index: 100;
+
+    padding: 22px 34px;
+    font-size: 22px;
+    border-radius: 10px;
+    font-weight: bold;
+    text-align: center;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s, transform 0.25s;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.toast.success {
+    background: rgba(185, 5, 245, 0.6);
+    border: 1px solid #4ade80;
+}
+
+.toast.error {
+    background: rgba(0, 2, 46, 0.9);
+    border: 1px solid #f87171;
+}
+
+/* TITLES */
+.page-title {
+    margin: 0;
+    font-size: clamp(28px, 3vw, 57px);
+    text-align: center;
+    color: #e6a6ff;
+    letter-spacing: 2px;
+    text-shadow: 0 0 12px rgba(185, 5, 245, 0.8);
+}
+
+.upgrade-title {
+    margin: 0;
+    font-size: clamp(24px, 2.5vw, 45px);
+    text-align: center;
+    color: #e6a6ff;
+    letter-spacing: 2px;
+    text-shadow: 0 0 12px rgba(185, 5, 245, 0.8);
+}
